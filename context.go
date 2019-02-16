@@ -834,6 +834,10 @@ func (c *Context) String(code int, format string, values ...interface{}) {
 	c.Render(code, render.String{Format: format, Data: values})
 }
 
+func (c *Context) StringXML(code int, obj string) {
+	c.Render(code, render.StringXML{Data: obj})
+}
+
 // Redirect returns a HTTP redirect to the specific location.
 func (c *Context) Redirect(code int, location string) {
 	c.Render(-1, render.Redirect{

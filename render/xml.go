@@ -6,6 +6,7 @@ package render
 
 import (
 	"encoding/xml"
+	"io"
 	"net/http"
 )
 
@@ -24,5 +25,21 @@ func (r XML) Render(w http.ResponseWriter) error {
 
 // WriteContentType (XML) writes XML ContentType for response.
 func (r XML) WriteContentType(w http.ResponseWriter) {
+	writeContentType(w, xmlContentType)
+}
+
+type StringXML struct {
+	Data string
+}
+
+// Render (XML) encodes the given interface object and writes data with custom ContentType.
+func (r StringXML) Render(w http.ResponseWriter) error {
+	r.WriteContentType(w)
+	_, err := io.WriteString(w, r.Data)
+	return err
+}
+
+// WriteContentType (XML) writes XML ContentType for response.
+func (r StringXML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, xmlContentType)
 }

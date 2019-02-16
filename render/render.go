@@ -31,6 +31,7 @@ var (
 	_ Render     = Reader{}
 	_ Render     = AsciiJSON{}
 	_ Render     = ProtoBuf{}
+	_ Render     = StringXML{}
 )
 
 func writeContentType(w http.ResponseWriter, value []string) {
